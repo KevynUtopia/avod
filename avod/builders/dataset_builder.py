@@ -143,6 +143,20 @@ class DatasetBuilder(object):
         }
         """
 
+
+    @staticmethod
+    def load_dataset_from_config_with_planes(dataset_config_path, dataset_dir, ground_plane):
+        dataset_config = kitti_dataset_pb2.KittiDatasetConfig()
+
+        with open(dataset_config_path, 'r') as f:
+            text_format.Merge(f.read(), dataset_config)
+
+        # Set dataset_config 'planes' and 'data_dirs' from args
+        dataset_config.ground_plane = ground_plane
+        dataset_config.dataset_dir = dataset_dir
+
+        return DatasetBuilder.build_kitti_dataset(dataset_config, use_defaults=False)
+
     @staticmethod
     def load_dataset_from_config(dataset_config_path):
 

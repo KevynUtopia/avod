@@ -1,5 +1,6 @@
 import os
 
+import argparse
 import numpy as np
 
 import avod
@@ -69,7 +70,7 @@ def split_work(all_child_pids, dataset, indices_split, num_children):
             os._exit(0)
 
 
-def main(dataset=None):
+def main(dataset_dir, ground_plane, dataset=None):
     """Generates anchors info which is used for mini batch sampling.
 
     Processing on 'Cars' can be split into multiple processes, see the Options
@@ -116,18 +117,19 @@ def main(dataset=None):
     # Dataset setup
     ##############################
     if process_car:
-        car_dataset = DatasetBuilder.load_dataset_from_config(
-            car_dataset_config_path)
+        car_dataset = DatasetBuilder.load_dataset_from_config_with_planes(
+            car_dataset_config_path, dataset_dir, ground_plane)
     if process_ped:
-        ped_dataset = DatasetBuilder.load_dataset_from_config(
-            ped_dataset_config_path)
+        ped_dataset = DatasetBuilder.load_dataset_from_config_with_planes(
+            ped_dataset_config_path, dataset_dir, ground_plane)
     if process_cyc:
-        cyc_dataset = DatasetBuilder.load_dataset_from_config(
-            cyc_dataset_config_path)
+        cyc_dataset = DatasetBuilder.load_dataset_from_config_with_planes(
+            cyc_dataset_config_path, dataset_dir, ground_plane)
     if process_ppl:
-        ppl_dataset = DatasetBuilder.load_dataset_from_config(
-            ppl_dataset_config_path)
+        ppl_dataset = DatasetBuilder.load_dataset_from_config_with_planes(
+            ppl_dataset_config_path, dataset_dir, ground_plane)
 
+    print('Dataset Dir: ', car_dataset.dataset_dir)
     ##############################
     # Serial Processing
     ##############################
@@ -196,4 +198,21 @@ def main(dataset=None):
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--dataset_dir',
+                        type=str,
+                        dest='dataset_dir',
+                        required=True,
+                        help='Path to the Data dir')
+
+    parser.add_argument('--plane',
+                        type=str,
+                        dest='plane',
+                        required=True,
+                        # choices=['constant', 'ground'],
+                        help='Whether to use "constant" or "ground" planes')
+
+    args = parser.parse_args()
+
+    main(args.dataset_dir, args.plane)

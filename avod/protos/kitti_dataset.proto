@@ -8,7 +8,7 @@ message KittiDatasetConfig {
     optional string name = 1 [default = "kitti"];
 
     // Top level directory of the dataset
-    optional string dataset_dir = 2 [default = "~/Kitti/object"];
+    optional string dataset_dir = 2 [default = "~/fakepath"];
 
     // Split for the data (e.g. 'train', 'val')
     optional string data_split = 3 [default = "train"];
@@ -18,6 +18,8 @@ message KittiDatasetConfig {
 
     // Whether the samples have labels
     optional bool has_labels = 5 [default = true];
+
+    optional string ground_plane = 11 [default = 'ground'];
 
     // The data split to be used for calculating clusters (e.g. val split
     // should use the train split for clustering)

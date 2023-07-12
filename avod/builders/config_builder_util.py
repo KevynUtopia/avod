@@ -6,8 +6,8 @@ import shutil
 from google.protobuf import text_format
 
 import avod
-from avod.protos import model_pb2
-from avod.protos import pipeline_pb2
+from ..avod.protos import model_pb2
+from ..avod.protos import pipeline_pb2
 
 
 class ConfigObj:

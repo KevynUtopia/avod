@@ -16,7 +16,8 @@ class LabelClusterUtils:
 
         self.cluster_split = dataset.cluster_split
 
-        self.data_dir = avod.root_dir() + "/data/label_clusters"
+        # self.data_dir = avod.root_dir() + "/data/label_clusters"
+        self.data_dir = avod.root_dir() + "/data/" + dataset.ground_plane + "/label_clusters"
         self.clusters = []
         self.std_devs = []
 

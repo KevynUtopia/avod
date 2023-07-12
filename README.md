@@ -1,4 +1,20 @@
-# Aggregate View Object Detection
+# Aggregate View Object Detection for Pseudo-Lidar
+
+## Notes:
+The original AVOD code works perfectly with pseudo-lidar. However, sometimes we need to switch ground truth between lidar and pseudo-lidar. I have modified the code to support it. Also, this code includes pretrained pseudo-lidar model, you should be able to directly run it.
+
+## How to use it?
+1. Follow the following instructions to install this avod model.
+2. Download pretrained model from https://drive.google.com/file/d/1P8o5ilNihcd1-hpES1EXyL0FjNaHnYTn/view?usp=sharing. Unzip it and put it under `./avod` folder.
+2. Download the KITTI training and testing data. Download pseudo-lidar training / testing velodynes and planes from https://github.com/mileyan/pseudo_lidar#2-stereo-depth-estimation-models.
+2. Go into the `./Kitti` folder and run `pseudo_lidar.py` to generate the dataset folder.
+    ```angular2
+    python pseudo_lidar.py --data_path object --save_name scratch_300_val        --train_velodyne object/training/velodyne       --test_velodyne object/testing/velodyne        --train_planes object/training/planes         --test_planes object/testing/pseudo-lidar_planes
+        ```
+3. Go into the `runs` folder and run `bash pseudo_lidar_val.sh` to evaluate our pseudo-lidar model. If you want to train this model by yourself, please uncomment #7 line in `pseudo_lidar_val.sh`.
+
+
+
 [1]: https://travis-ci.com/kujason/avod
 [![Build Status](https://travis-ci.com/kujason/avod.svg?token=q1CfB5VfAVvKxUyudP69&branch=master)][1]
 

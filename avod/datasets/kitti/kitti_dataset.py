@@ -46,6 +46,7 @@ class KittiDataset:
         data_split_dir = self.config.data_split_dir
 
         self.has_labels = self.config.has_labels
+        self.ground_plane = self.config.ground_plane
         self.cluster_split = self.config.cluster_split
 
         self.classes = list(self.config.classes)
