@@ -1,6 +1,10 @@
 # Aggregate View Object Detection for Pseudo-Lidar
 
-## Notes:
+## Notes for COMP7404:
+This is the updated forks for COMP7404 (group 12). The original fork of avod for psmnet is [avod_pl](https://github.com/mileyan/avod_pl).
+
+
+## Notes for original avod:
 The original AVOD code works perfectly with pseudo-lidar. However, sometimes we need to switch ground truth between lidar and pseudo-lidar. I have modified the code to support it. Also, this code includes pretrained pseudo-lidar model, you should be able to directly run it.
 
 ## How to use it?
